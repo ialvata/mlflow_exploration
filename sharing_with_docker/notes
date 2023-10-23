@@ -1,0 +1,20 @@
+## Structure of this MLflow Project
+First build the image for the project's Docker container environment. You must use the same image name that is given by the docker_env.image field of the MLproject file. In this example, the image name is mlflow-docker-wine. Issue the following command to build an image with this name:
+
+    `docker build -t mlflow-docker-wine -f sharing_with_docker/Dockerfile .`
+
+Note that the name if the image used in the docker build command, mlflow-docker-example, matches the name of the image referenced in the MLproject file.
+
+Finally, run the example project using
+
+    `mlflow run sharing_with_docker -P n_estimators=50 -P max_depth=5 -P max_features=3`
+
+The problem with running `mlflow run` is that it will run:
+
+```docker run --rm -v /home/ivo/Programming_Personal_Projects/mlflow_exploration/mlruns:/mlflow/tmp/mlruns -v /home/ivo/Programming_Personal_Projects/mlflow_exploration/mlruns/0/da804b67a0af4fd68fc9d0f4a1d724b0/artifacts:/home/ivo/Programming_Personal_Projects/mlflow_exploration/mlruns/0/da804b67a0af4fd68fc9d0f4a1d724b0/artifacts -e MLFLOW_RUN_ID=da804b67a0af4fd68fc9d0f4a1d724b0 -e MLFLOW_TRACKING_URI=file:///mlflow/tmp/mlruns -e MLFLOW_EXPERIMENT_ID=0 mlflow-docker-wine:latest python3 sharing_with_docker/wine.py --n_estimators 50 --max_depth 5 --max_features 3```
+
+and this determines the run and experiment ids...
+
+```docker run -e MLFLOW_EXPERIMENT_NAME="SHARING_WITH_DOCKER_EXPERIMENT" -e MLFLOW_RUN_NAME="sharing_with_docker" mlflow-docker-wine python3 sharing_with_docker/wine.py --n_estimators 50 --max_depth 5 --max_features 3``` <-- This doesn't send to the server/volume,
+and hence we lose all data...
+
