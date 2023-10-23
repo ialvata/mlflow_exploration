@@ -119,8 +119,11 @@ celerybeat.pid
 # SageMath parsed files
 *.sage.py
 
+# mlruns
+mlruns
+
 # Environments
-.env
+.env_mlflow
 .venv
 env/
 venv/
