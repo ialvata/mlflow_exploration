@@ -1,0 +1,2 @@
+In the logging_experiments.py, we'll send all the files in the output folder to log as
+artifacts.

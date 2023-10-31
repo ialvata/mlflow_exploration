@@ -121,6 +121,7 @@ celerybeat.pid
 
 # mlflow
 mlruns
+mlartifacts
 
 # Environments
 .env_mlflow
