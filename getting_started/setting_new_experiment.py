@@ -30,6 +30,7 @@ produce_wines_experiment = client.create_experiment(
     name="Wine_Models", tags=experiment_tags
 )
 
+# changing a tag in already created experiment
 client.set_experiment_tag(experiment_id = produce_wines_experiment,
                           key = "team", value="stores-machine_learning")
 
