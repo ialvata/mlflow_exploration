@@ -12,14 +12,14 @@ import pandas as pd
 import json
 
 db = load_diabetes()
-X_train, X_test, y_train, y_test = train_test_split(db.data, db.target)
+X_train, X_test, y_train, y_test = train_test_split(db.data, db.target) # type: ignore
  # Create and train models.
 params = {"n_estimators": 100, "max_depth": 6, "max_features":3}
 # creating the model
 rf = RandomForestRegressor(**params) # type: ignore
 rf.fit(X_train, y_train)
 # Build the Evaluation Dataset from the test set
-eval_data = pd.DataFrame(X_test, columns = db.feature_names)
+eval_data = pd.DataFrame(X_test, columns = db.feature_names) # type: ignore
 eval_data["label"] = y_test
 with mlflow.start_run(run_name="diabetes_2") as run:
       result = mlflow.evaluate(
